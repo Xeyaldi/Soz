@@ -11,7 +11,7 @@ from aiogram.client.default import DefaultBotProperties
 # Heroku Config Vars-dan oxunacaq
 API_TOKEN = os.getenv('BOT_TOKEN')
 
-# DÜZƏLİŞ: Heroku loqlarındakı TypeError-un həlli
+# DÜZƏLİŞ: aiogram 3.7+ versiyalarında parse_mode belə təyin olunmalıdır
 bot = Bot(
     token=API_TOKEN, 
     default=DefaultBotProperties(parse_mode="Markdown")
@@ -37,7 +37,7 @@ def add_score(user_id, name, points):
     conn.commit()
     conn.close()
 
-# --- 📚 500+ SÖZLÜK LÜĞƏT BAZASI ---
+# --- 📚 500+ SÖZLÜK LÜĞƏT BAZASI (Hər şey qaldı) ---
 AZ_WORDS = {
     "ANA", "ATA", "BACİ", "QARDAS", "ALMA", "ARMUD", "KİTAB", "QALEM", "DEFTER", "MEKTEB", "DENİZ", "SAHİL", "VETEN", "AZERBAYCAN",
     "DÜNYA", "HEYAT", "İNSAN", "DEMİR", "GÜMÜS", "QIZIL", "BULAQ", "ORMAN", "DAGLAR", "CEYRAN", "ASLAN", "PELENG", "TÜLKÜ",
@@ -52,32 +52,32 @@ AZ_WORDS = {
     "ZÜRAFƏ", "MEYMUN", "DİNOZAVR", "ƏJDƏHA", "MAŞIN", "GƏMİ", "TƏYYARƏ", "QATAR", "VELOSİPED", "METRO", "AVTOBUS", "YOL", "KÜÇƏ", "MEYDAN",
     "BİNA", "EV", "OTAQ", "PƏNCƏRƏ", "QAPI", "DAM", "HƏYƏT", "BAĞÇA", "MEŞƏ", "ÇAY", "GÖL", "OKEAN", "ADA", "SƏHRA", "VADİ", "MAĞARA",
     "DAŞ", "QUMLU", "TORPAQ", "HAVA", "OD", "SU", "KİBRİT", "ALOV", "KÖMÜR", "KÜL", "DÜYÜ", "ŞƏKƏR", "DUZ", "İSTİOT", "SÜD", "QATIQ",
-    "YAĞ", "BAL", "MEYVƏ", "TƏRƏVƏZ", "BİTKİ", "AĞAC", "YARPAQ", "BUDAQ", "KÖK", "MEYVƏ", "ÜZÜM", "NAR", "HEYVA", "GİLAS", "ALBALI",
-    "ƏRİK", "ŞAFTALI", "QAVUN", "QARPIZ", "LİMON", "PORTAĞAL", "MANDARİN", "BANAN", "ÇİYƏLƏK", "MƏRCİ", "NUXUD", "LOVYA", "SİRNİYYAT",
-    "PAXAVA", "ŞƏKƏRBURA", "SƏMƏNİ", "NOVRUZ", "BAYRAM", "HƏDİYYƏ", "QONAQ", "SÖHBƏT", "ZARAFAT", "GÜLÜŞ", "AĞLAMAQ", "YUXU", "OYANMAQ",
-    "GƏZMƏK", "QAÇMAQ", "ÜZMƏK", "UÇMAQ", "OXUMAQ", "YAZMAQ", "DÜŞÜNMƏK", "BAXMAQ", "EŞİTMƏK", "TOXUNMAQ", "İYLƏMƏK", "DADMAQ", "BİLMƏK",
-    "GÖRMƏK", "ANLAMAK", "GÜCLÜ", "ZƏİF", "BÖYÜK", "KİÇİK", "UZUN", "QISA", "GENİŞ", "DAR", "AĞİR", "YÜNGÜL", "SÜRƏTLİ", "YAVAŞ", "İSTİ",
-    "SOYUQ", "SƏRT", "YUMŞAQ", "GÖZƏL", "ÇİRKİN", "YAXŞI", "PİS", "DOĞRU", "YALAN", "TƏMİZ", "ÇİRKALİ", "YENİ", "KÖHNƏ", "AC", "TOX",
-    "ŞİRİN", "ACI", "TURŞ", "DUZLU", "PARLAQ", "SOLĞUN", "RƏNGLİ", "AĞ", "QARA", "QIRMIZI", "MAVİ", "YAŞIL", "SARI", "NARINCI", "BƏNÖVŞƏYİ",
-    "QƏHVƏYİ", "BOZ", "GÜMÜŞÜ", "QIZILI", "SƏADƏT", "BƏXT", "TALEY", "QİSMƏT", "SƏBİR", "DÖZÜM", "İNAM", "ÜMİD", "CƏSARƏT", "QORXU",
-    "HƏYƏCAN", "MARAQ", "TƏƏCCÜB", "NİFRƏT", "HÖRMƏT", "QAYĞI", "ŞƏFQƏT", "VƏFA", "SƏDAQƏT", "ZƏKA", "AĞIL", "MƏNTİQ", "YADDAŞ", "DİQQƏT",
-    "İRADƏ", "HƏDƏF", "MƏQSƏD", "UĞUR", "NƏTİCƏ", "SƏHV", "TƏCRÜBƏ", "HƏRƏKƏT", "DURĞUNLUQ", "DƏYİŞİKLİK", "İNKIŞAF", "TƏRƏQQİ", "SİVİLİZASİYA",
-    "KOMPÜTER", "TELEFON", "İNTERNET", "PROQRAM", "OYUN", "EKRAN", "KLAVİATURA", "MOUSE", "YADDAŞ", "KAMERA", "RADİO", "TELEVİZOR", "ENERJİ",
-    "İŞIQ", "BATAREYA", "SAAT", "VAXT", "ZAMAN", "ƏSR", "MİLLƏT", "XALQ", "DİL", "LÜĞƏT", "SÖZ", "CÜMLƏ", "MƏTN", "KİTABXANA", "ARXİV",
-    "MUZEY", "TEATR", "KİNO", "SİRK", "STADİON", "İDMAN", "FUTBOL", "ŞAHMAT", "GÜLƏŞ", "BOKS", "QAÇIŞ", "MƏŞQ", "YARIŞ", "MÜKAFAT", "MEDAL",
-    "KUBOK", "ÇEMPİON", "REKORD", "SƏYAHƏT", "TURİST", "BİLET", "OTEL", "PASPORT", "VİZA", "XƏRİTƏ", "KOMPAS", "DÜRBÜN", "ÇANTAN", "PALTAR",
-    "AYAQQABI", "PAPAQ", "ƏLCƏK", "ŞƏRF", "KÖYNƏK", "ŞALVAR", "YUBKA", "PALTO", "ÇƏTİR", "EYNƏK", "SAAT", "ÜZÜK", "SIRĞA", "BOYUNBAĞI",
-    "BİLEZİK", "KƏMƏR", "CİB", "PULQABI", "AYNA", "DARAG", "SABUN", "ŞAMPUN", "DƏSMAL", "YATAQ", "YASTIQ", "YORĞAN", "DÖŞƏK", "MEBEL",
-    "STOL", "STUL", "DİVAN", "ŞKAF", "RƏF", "XALÇA", "PƏRDƏ", "LAMPA", "SOBA", "SOYUDUCU", "SOBA", "QAZAN", "TAVA", "BOŞQAB", "FİNCAN",
-    "QAŞIQ", "VİLKA", "BIÇAQ", "SÜFRƏ", "DƏMLİK", "ÇAYDAN", "SAMOVAR", "FINDIQ", "QOZ", "BADAM", "PUSTƏ", "LEBLƏBİ", "SƏBƏT", "TORBA",
-    "BALXAN", "XAN", "BALIQLAR", "ALİ", "BAĞ", "BAĞLAR", "BAĞLI", "İĞLƏ", "LİL", "MİL", "MAL", "MAĞAR", "MİLLİ", "ƏLİ", "ƏLA", "İLİ"
+    "YAĞ", "BAL", "MEYVƏ", "TƏRƏVƏZ", "BİTKİ", "AĞAC", "YARPAQ", "BUDAQ", "KÖK", "ÜZÜM", "NAR", "HEYVA", "GİLAS", "ALBALI", "ƏRİK", "ŞAFTALI",
+    "QAVUN", "QARPIZ", "LİMON", "PORTAĞAL", "MANDARİN", "BANAN", "ÇİYƏLƏK", "MƏRCİ", "NUXUD", "LOVYA", "SİRNİYYAT", "PAXAVA", "ŞƏKƏRBURA",
+    "SƏMƏNİ", "NOVRUZ", "BAYRAM", "HƏDİYYƏ", "QONAQ", "SÖHBƏT", "ZARAFAT", "GÜLÜŞ", "AĞLAMAQ", "YUXU", "OYANMAQ", "GƏZMƏK", "QAÇMAQ", "ÜZMƏK",
+    "UÇMAQ", "OXUMAQ", "YAZMAQ", "DÜŞÜNMƏK", "BAXMAQ", "EŞİTMƏK", "TOXUNMAQ", "İYLƏMƏK", "DADMAQ", "BİLMƏK", "GÖRMƏK", "ANLAMAK", "GÜCLÜ",
+    "ZƏİF", "BÖYÜK", "KİÇİK", "UZUN", "QISA", "GENİŞ", "DAR", "AĞİR", "YÜNGÜL", "SÜRƏTLİ", "YAVAŞ", "İSTİ", "SOYUQ", "SƏRT", "YUMŞAQ", "GÖZƏL",
+    "ÇİRKİN", "YAXŞI", "PİS", "DOĞRU", "YALAN", "TƏMİZ", "ÇİRKALİ", "YENİ", "KÖHNƏ", "AC", "TOX", "ŞİRİN", "ACI", "TURŞ", "DUZLU", "PARLAQ",
+    "SOLĞUN", "RƏNGLİ", "AĞ", "QARA", "QIRMIZI", "MAVİ", "YAŞIL", "SARI", "NARINCI", "BƏNÖVŞƏYİ", "QƏHVƏYİ", "BOZ", "GÜMÜŞÜ", "QIZILI",
+    "SƏADƏT", "BƏXT", "TALEY", "QİSMƏT", "SƏBİR", "DÖZÜM", "İNAM", "ÜMİD", "CƏSARƏT", "QORXU", "HƏYƏCAN", "MARAQ", "TƏƏCCÜB", "NİFRƏT",
+    "HÖRMƏT", "QAYĞI", "ŞƏFQƏT", "VƏFA", "SƏDAQƏT", "ZƏKA", "AĞIL", "MƏNTİQ", "YADDAŞ", "DİQQƏT", "İRADƏ", "HƏDƏF", "MƏQSƏD", "UĞUR", "NƏTİCƏ",
+    "SƏHV", "TƏCRÜBƏ", "HƏRƏKƏT", "DURĞUNLUQ", "DƏYİŞİKLİK", "İNKIŞAF", "TƏRƏQQİ", "SİVİLİZASİYA", "KOMPÜTER", "TELEFON", "İNTERNET", "PROQRAM",
+    "OYUN", "EKRAN", "KLAVİATURA", "MOUSE", "KAMERA", "RADİO", "TELEVİZOR", "ENERJİ", "İŞIQ", "BATAREYA", "SAAT", "VAXT", "ZAMAN", "ƏSR",
+    "MİLLƏT", "XALQ", "DİL", "LÜĞƏT", "SÖZ", "CÜMLƏ", "MƏTN", "KİTABXANA", "ARXİV", "MUZEY", "TEATR", "KİNO", "SİRK", "STADİON", "İDMAN",
+    "FUTBOL", "ŞAHMAT", "GÜLƏŞ", "BOKS", "QAÇIŞ", "MƏŞQ", "YARIŞ", "MÜKAFAT", "MEDAL", "KUBOK", "ÇEMPİON", "REKORD", "SƏYAHƏT", "TURİST",
+    "BİLET", "OTEL", "PASPORT", "VİZA", "XƏRİTƏ", "KOMPAS", "DÜRBÜN", "ÇANTAN", "PALTAR", "AYAQQABI", "PAPAQ", "ƏLCƏK", "ŞƏRF", "KÖYNƏK",
+    "ŞALVAR", "YUBKA", "PALTO", "ÇƏTİR", "EYNƏK", "SAAT", "ÜZÜK", "SIRĞA", "BOYUNBAĞI", "BİLEZİK", "KƏMƏR", "CİB", "PULQABI", "AYNA", "DARAG",
+    "SABUN", "ŞAMPUN", "DƏSMAL", "YATAQ", "YASTIQ", "YORĞAN", "DÖŞƏK", "MEBEL", "STOL", "STUL", "DİVAN", "ŞKAF", "RƏF", "XALÇA", "PƏRDƏ",
+    "LAMPA", "SOBA", "SOYUDUCU", "QAZAN", "TAVA", "BOŞQAB", "FİNCAN", "QAŞIQ", "VİLKA", "BIÇAQ", "SÜFRƏ", "DƏMLİK", "ÇAYDAN", "SAMOVAR",
+    "FINDIQ", "QOZ", "BADAM", "PUSTƏ", "LEBLƏBİ", "SƏBƏT", "TORBA", "BALXAN", "XAN", "BALIQLAR", "ALİ", "BAĞ", "BAĞLAR", "BAĞLI", "İĞLƏ",
+    "LİL", "MİL", "MAL", "MAĞAR", "MİLLİ", "ƏLİ", "ƏLA", "İLİ"
 }
 
 # --- 🎮 OYUN MEXANİKMASI ---
 game = {"active": False, "main_word": "", "found_words": []}
 WORDS_BANK = ["MÜBALİĞƏLİ", "AZƏRBAYCAN", "ELEKTRONİKA", "KİBERNETİKA", "MÜSTƏQİLLİK", "KAMPANİYA", "KONSTİTUSİYA", "MƏDƏNİYYƏT", "SİVİLİZASİYA", "TRANSFORMASİYA"]
 
-# --- 🏠 START MESAJI ---
+# --- 🏠 START ---
 @dp.message(Command("start"))
 async def start_cmd(message: types.Message):
     builder = InlineKeyboardBuilder()
@@ -96,7 +96,7 @@ async def start_cmd(message: types.Message):
     )
     await message.answer(welcome_text, reply_markup=builder.as_markup())
 
-# --- 🏆 REYTİNQ SİSTEMİ (Top 13) ---
+# --- 🏆 REYTİNQ ---
 async def get_ranking(data_type="total"):
     column = "total_score" if data_type == "total" else "daily_score"
     title = "🏆 Ümumi Sıralama (Top 13)" if data_type == "total" else "📊 Günlük Sıralama (Top 13)"
@@ -116,13 +116,11 @@ async def get_ranking(data_type="total"):
 
 @dp.message(Command("umumi"))
 async def cmd_umumi(message: types.Message):
-    res = await get_ranking("total")
-    await message.answer(res)
+    await message.answer(await get_ranking("total"))
 
 @dp.message(Command("gunluk"))
 async def cmd_gunluk(message: types.Message):
-    res = await get_ranking("daily")
-    await message.answer(res)
+    await message.answer(await get_ranking("daily"))
 
 @dp.message(Command("startsoz"))
 async def start_logic(message: types.Message):
@@ -135,8 +133,7 @@ async def start_logic(message: types.Message):
     game["active"] = True
     game["main_word"] = random.choice(WORDS_BANK)
     game["found_words"] = []
-    display_word = "  ".join(game["main_word"])
-    await message.answer(f"🎮 **Oyun başladı!**\n⭐ {display_word}")
+    await message.answer(f"🎮 **Oyun başladı!**\n⭐ {'  '.join(game['main_word'])}")
 
 # --- 🐍 OYUN LOGİKASI (SS FORMATI) ---
 @dp.message()
@@ -163,27 +160,24 @@ async def game_handler(message: types.Message):
             points = len(word_upper)
             add_score(message.from_user.id, message.from_user.first_name, points)
             
-            display_word = "  ".join(game["main_word"])
             response = (
                 f"🐍\n"
                 f"**{word_upper.capitalize()}**\n"
                 f"🐍 👍 **Cavab Doğrudur!**\n"
                 f"**siz {points} xal qazandınız**\n\n"
-                f"⭐  {display_word}"
+                f"⭐  {'  '.join(game['main_word'])}"
             )
             await message.reply(response)
 
-# --- 🖱 CALLBACK HANDLERS ---
+# --- 🖱 CALLBACKS ---
 @dp.callback_query(F.data == "show_top")
 async def cb_top(callback: types.CallbackQuery):
-    res = await get_ranking("total")
-    await callback.message.answer(res)
+    await callback.message.answer(await get_ranking("total"))
     await callback.answer()
 
 @dp.callback_query(F.data == "show_daily")
 async def cb_daily(callback: types.CallbackQuery):
-    res = await get_ranking("daily")
-    await callback.message.answer(res)
+    await callback.message.answer(await get_ranking("daily"))
     await callback.answer()
 
 @dp.callback_query(F.data == "start_game")
