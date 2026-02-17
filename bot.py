@@ -6,11 +6,16 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.enums import ChatType
+from aiogram.client.default import DefaultBotProperties
 
 # Heroku Config Vars-dan oxunacaq
 API_TOKEN = os.getenv('BOT_TOKEN')
 
-bot = Bot(token=API_TOKEN, parse_mode="Markdown")
+# DÜZƏLİŞ: Heroku loqlarındakı TypeError-un həlli
+bot = Bot(
+    token=API_TOKEN, 
+    default=DefaultBotProperties(parse_mode="Markdown")
+)
 dp = Dispatcher()
 
 # --- 🗄 VERİLƏNLƏR BAZASI ---
